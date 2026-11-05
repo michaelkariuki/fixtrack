@@ -1,5 +1,6 @@
 # FixTrack
 
+![CI](https://github.com/michaelkariuki/fixtrack/actions/workflows/ci.yml/badge.svg)
 ![status](https://pulse.waigurumichael252.workers.dev/api/badge/fixtrack.svg)
 
 Repair job management with a React/Vite UI, Hono Worker API and Cloudflare D1. The redesigned UI follows the approved compact CRM reference: solid white panels, fine borders, restrained accents and list-first job management.
@@ -136,5 +137,16 @@ Deployment notes:
 No account profile, automated messaging, logo upload, tax integration or drag-and-drop is advertised as implemented.
 
 ## Verification
+
+`npm run check` typechecks, builds and runs the Miniflare suite. `npm test` (Playwright) boots the real Worker in Miniflare with all migrations applied and a seeded workspace, serves the built SPA, and drives the sign-in screen, the customer quotation page, quote approval with the paid balance, unknown-token handling and approval idempotency.
+
+```sh
+npm ci
+npm --prefix frontend ci
+npx playwright install chromium
+npm run check && npm run test:e2e
+```
+
+CI runs both suites on every push and pull request.
 
 `npm run check` typechecks the Worker and the frontend, builds the UI, and runs the Miniflare regression suite against a temporary D1 database. The suite covers the quote approval and balance guard, payment replay, M-Pesa callback replay, amount mismatch, unknown checkout IDs, callback-token enforcement, notification history and unmatched-payment resolution.

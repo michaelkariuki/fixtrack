@@ -13,3 +13,6 @@ frontend/tsconfig.tsbuildinfo
 *.log
 
 !.dev.vars.example
+
+test-results/
+playwright-report/

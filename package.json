@@ -11,7 +11,8 @@
     "check": "npm run typecheck && npm run build && npm test",
     "deploy": "npm run check && wrangler deploy",
     "db:migrate:local": "wrangler d1 migrations apply fixtrack-db --local",
-    "db:migrate:remote": "wrangler d1 migrations apply fixtrack-db --remote"
+    "db:migrate:remote": "wrangler d1 migrations apply fixtrack-db --remote",
+    "test:e2e": "playwright test"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20260611.1",
+    "@playwright/test": "^1.56.1",
     "esbuild": "^0.28.2",
     "miniflare": "4.20260611.0",
     "typescript": "^5.9.3",
