@@ -1,0 +1,31 @@
+{
+  "name": "fixtrack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test src/tests/workflow.test.mjs",
+    "check": "npm run typecheck && npm run build && npm test",
+    "deploy": "npm run check && wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply fixtrack-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply fixtrack-db --remote"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "hono": "^4.13.16",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20260611.1",
+    "esbuild": "^0.28.2",
+    "miniflare": "4.20260611.0",
+    "typescript": "^5.9.3",
+    "wrangler": "4.100.0"
+  }
+}

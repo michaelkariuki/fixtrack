@@ -1,0 +1,11 @@
+import type { ReactNode } from 'react'
+import { AlertCircle, Wrench } from 'lucide-react'
+import type { Job, JobStatus } from '../../../shared/contracts'
+import { formatKES } from '../api/client'
+export const statusLabels: Record<JobStatus, string> = { received: 'Received', diagnosed: 'Awaiting approval', approved: 'Approved', in_repair: 'In repair', ready: 'Ready for collection', delivered: 'Collected' }
+export function StatusBadge({ status, quoteStatus }: { status: JobStatus; quoteStatus?: string | null }) { return <span className={`badge status-${status}`}><span className="status-dot" />{quoteStatus === 'changes_requested' && status === 'diagnosed' ? 'Changes requested' : statusLabels[status]}</span> }
+export function PaymentBadge({ job }: { job: Job }) { if (job.quote_status !== 'approved') return <span className="text-muted">{job.total_amount === null ? 'Not quoted' : 'Awaiting agreement'}</span>; const balance = (job.total_amount || 0) - job.total_paid; return <span className={`payment-label ${balance > 0 ? 'balance-due' : 'settled'}`}>{balance > 0 ? formatKES(balance) : 'Settled'}{balance > 0 && <small>{job.total_paid > 0 ? 'Deposit recorded' : 'Balance due'}</small>}</span> }
+export function PageHeading({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: ReactNode }) { return <div className="page-heading"><div>{eyebrow && <p className="eyebrow">{eyebrow}</p>}<h1>{title}</h1>{description && <p className="text-muted">{description}</p>}</div>{action}</div> }
+export function ErrorNotice({ message }: { message: string | null }) { return message ? <div className="notice notice-error" role="alert"><AlertCircle size={17} /><span>{message}</span></div> : null }
+export function StatePanel({ title, children, action }: { title: string; children?: ReactNode; action?: ReactNode }) { return <div className="empty-state"><div className="empty-icon"><Wrench size={22} /></div><h2>{title}</h2><p className="text-muted">{children}</p>{action}</div> }
+export function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string | null; children: ReactNode }) { return <label className={`field ${error ? 'has-error' : ''}`}><span>{label}</span>{children}{error ? <small className="error-text">{error}</small> : hint && <small>{hint}</small>}</label> }

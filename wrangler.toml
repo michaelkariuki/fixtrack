@@ -1,0 +1,18 @@
+name = "fixtrack"
+main = "src/index.ts"
+compatibility_date = "2026-06-11"
+
+[assets]
+directory = "frontend/dist"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fixtrack-db"
+database_id = "a0d144e9-634c-43d8-8db6-54ef3592f1b2"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "ATTACHMENTS"
+bucket_name = "fixtrack-attachments"

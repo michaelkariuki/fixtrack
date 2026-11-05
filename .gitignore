@@ -1,0 +1,15 @@
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+.wrangler/
+.deploy-preview/
+.ui-smoke.mjs
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+*.log
+
+!.dev.vars.example
